@@ -24,7 +24,7 @@ public static class SaveSystem
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/level" + level.ToString() + ".txt";
-        FileStream stream = new FileStream(path, FileMode.Append);
+        //FileStream stream = new FileStream(path, FileMode.Append);
         
 
 
@@ -32,8 +32,14 @@ public static class SaveSystem
 
         LevelData alreadySavedLevelData = LoadLevel(level);
         alreadySavedLevelData.earnedStarCount = earnedStarCount_;
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+
+        }
+        FileStream stream = new FileStream(path, FileMode.Create);
         //LevelData data = new LevelData(level, earnedStarCount_, indexes); //
-        
+
 
         formatter.Serialize(stream, alreadySavedLevelData);
         stream.Close();

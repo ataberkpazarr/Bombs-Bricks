@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class LevelCell : MonoBehaviour
@@ -10,6 +12,11 @@ public class LevelCell : MonoBehaviour
     [SerializeField] private GameObject unfilledStar1, unfilledStar2, unfilledStar3;
     [SerializeField] private GameObject playButton;
     [SerializeField] private GameObject lockedButton;
+    [SerializeField] private GameObject progressBar;
+    [SerializeField] private Slider sliderToFillProgressBar;
+    [SerializeField] private TextMeshProUGUI progressText;
+
+
 
 
     [SerializeField] private Text levelText;
@@ -47,6 +54,8 @@ public class LevelCell : MonoBehaviour
         }
     }
 
+   
+
     public void UpdateLevelText(int level_)
     {
         level = level_;
@@ -66,6 +75,56 @@ public class LevelCell : MonoBehaviour
     {
         playButton.SetActive(false);
         lockedButton.SetActive(true);
+
+    }
+
+    public void ActivateProgressBar(int currentEarnedStars,int requiredStars)
+    {
+        unfilledStar1.SetActive(false);
+        unfilledStar2.SetActive(false);
+        unfilledStar3.SetActive(false);
+
+        progressBar.SetActive(true);
+
+
+        float currentRatio = (float)currentEarnedStars / (float)requiredStars;
+
+        sliderToFillProgressBar.normalizedValue = currentRatio;
+        sliderToFillProgressBar.onValueChanged.AddListener(delegate { PreventSliding(currentRatio); });
+
+        progressText.text = currentEarnedStars.ToString() + "/" + requiredStars.ToString();
+
+    }
+
+    private void PreventSliding(float val)
+    {
+        sliderToFillProgressBar.normalizedValue = val;
+    }
+
+    public void LoadLevelToPlay()
+    {
+
+        Debug.Log("s");
+        LevelData levelData= SaveSystem.LoadLevel(level);
+        List<List<string>> indexes = levelData.indexes;
+        int y = indexes.Count;
+        int x = indexes[0].Count;
+        //Board.Instance.SetupBoard(x, y);
+
+        //StartCoroutine(LoadRelevantScene("GamePlay"));
+        Board.Instance.SetCurrentBoardSpecifications(x,y,indexes,level,levelData.earnedStarCount);
+        SceneManager.LoadScene("GamePlay");
+        //Board.Instance.SetupBoard(x, y);
+
+        //Board.Instance.SetupCamera(x, y);
+
+    }
+
+    private IEnumerator LoadRelevantScene(string sceneName)
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(sceneName);
+
 
     }
 }

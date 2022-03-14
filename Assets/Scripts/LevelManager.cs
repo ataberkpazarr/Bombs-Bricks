@@ -8,11 +8,31 @@ using System.Text;
 
 public class LevelManager : Singleton<LevelManager>
 {
-
+    [SerializeField] Board boardPref;
     private void Start()
     {
+        //SaveSystem.DeleteAllPersistentData();
+        /*
+        SaveSystem.SaveLevelEarnedStars(10,1);
+        SaveSystem.SaveLevelEarnedStars(11, 1);
+        SaveSystem.SaveLevelEarnedStars(12, 3);
+        SaveSystem.SaveLevelEarnedStars(13, 3);
+        SaveSystem.SaveLevelEarnedStars(14, 3);
+        SaveSystem.SaveLevelEarnedStars(15, 1);
+        SaveSystem.SaveLevelEarnedStars(16, 3);
+        SaveSystem.SaveLevelEarnedStars(17, 3);
+        SaveSystem.SaveLevelEarnedStars(18, 1);
+        SaveSystem.SaveLevelEarnedStars(19, 1);
+        SaveSystem.SaveLevelEarnedStars(20, 1);
+        */
+
+
+
+
+
+
         /////////SaveSystem.DeleteAllPersistentData();
-        if(SaveSystem.CheckIfAllLevelIndexesDownloaded())
+        if (SaveSystem.CheckIfAllLevelIndexesDownloaded())
         {
 
             LevelBarsContainer.Instance.CreateLevelCellsToSelect(totalLevelCount);
@@ -50,9 +70,12 @@ public class LevelManager : Singleton<LevelManager>
             
 
 
-            //LevelBarsContainer.Instance.CreateLevelCellsToSelect();
+            LevelBarsContainer.Instance.CreateLevelCellsToSelect(totalLevelCount);
 
         }
+
+        Board board=Instantiate(boardPref,new Vector3(0,0,0),Quaternion.identity);
+        DontDestroyOnLoad(board);
     }
     [SerializeField] private int totalLevelCount;
 
@@ -82,7 +105,7 @@ public class LevelManager : Singleton<LevelManager>
 
 
             List<List<string>> levelIndexesList = new List<List<string>>();
-            
+            /*
             for (int j = 0; j < rowArray.Length; j++)
             {
                 string[] currentRowIndexes = rowArray[j].Split(',');
@@ -93,6 +116,25 @@ public class LevelManager : Singleton<LevelManager>
                 }
                 levelIndexesList.Add(currentRowIndexesList);
             }
+            */
+            for (int j = rowArray.Length - 1; j >=0; j--)
+            {
+                string[] currentRowIndexes = rowArray[j].Split(',');
+                List<String> currentRowIndexesList = new List<string>();
+                /*
+                for (int k = currentRowIndexes.Length-1; k >=0; k--)
+                {
+                    currentRowIndexesList.Add(currentRowIndexes[k]);
+                }
+                */
+                for (int k = 0; k < currentRowIndexes.Length; k++)
+                {
+                    currentRowIndexesList.Add(currentRowIndexes[k]);
+                }
+                levelIndexesList.Add(currentRowIndexesList);
+            }
+
+
             SaveSystem.SaveLevelIndexesForFirstTime(i,levelIndexesList);
             //print level indexes
             /*
