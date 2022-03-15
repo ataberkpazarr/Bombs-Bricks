@@ -22,8 +22,7 @@ public class LevelCell : MonoBehaviour
     [SerializeField] private Text levelText;
 
     private int level;
-    private int earnedStarCount;
-    private bool isLevelLocked;
+
     
     public void FillStars(int totalStarNumToFill)
     {
@@ -96,7 +95,7 @@ public class LevelCell : MonoBehaviour
 
     }
 
-    private void PreventSliding(float val)
+    private void PreventSliding(float val) 
     {
         sliderToFillProgressBar.normalizedValue = val;
     }
@@ -109,22 +108,10 @@ public class LevelCell : MonoBehaviour
         List<List<string>> indexes = levelData.indexes;
         int y = indexes.Count;
         int x = indexes[0].Count;
-        //Board.Instance.SetupBoard(x, y);
-
-        //StartCoroutine(LoadRelevantScene("GamePlay"));
         Board.Instance.SetCurrentBoardSpecifications(x,y,indexes,level,levelData.earnedStarCount);
         SceneManager.LoadScene("GamePlay");
-        //Board.Instance.SetupBoard(x, y);
-
-        //Board.Instance.SetupCamera(x, y);
 
     }
 
-    private IEnumerator LoadRelevantScene(string sceneName)
-    {
-        yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(sceneName);
-
-
-    }
+   
 }

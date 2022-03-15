@@ -8,9 +8,6 @@ public class BoardSetup : MonoBehaviour
     { 
         Board.Instance.SetupCamera();
         Board.Instance.SetupBoard();
-        Debug.Log("ssp");
         Board.Instance.FindMinimumNumberOfBombs();
-        
-       
     }
 }

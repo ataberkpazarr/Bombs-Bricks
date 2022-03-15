@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b144e8d1aa0b4cba9474fc322ca66b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileNormalPrefab: {fileID: 2983910312987665306, guid: da88b74440284453e909728d1ca54b0a,
+  tileNormalPrefab: {fileID: 6256373224269914518, guid: da88b74440284453e909728d1ca54b0a,
     type: 3}
   tileBrickPrefab: {fileID: 4888406232621632329, guid: 22b6ad0f4c1c64cf485460db71734ba4,
     type: 3}

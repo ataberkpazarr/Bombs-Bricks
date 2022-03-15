@@ -12,9 +12,7 @@ public class GamePlayCanvasController : Singleton<GamePlayCanvasController>
 
 
     private int totalAmountOfBomb;
-    private int width, height;
-    private List<List<string>> currentIndexes;
-    private int currentLevel;
+
 
     public void GoBackToLevelSelectionScene()
     {
@@ -35,13 +33,7 @@ public class GamePlayCanvasController : Singleton<GamePlayCanvasController>
         bombText.text = totalAmountOfBomb.ToString();
 
     }
-    public void SetCurrentBoardSpecifications(int x, int y, List<List<string>> currentIndexes_, int level)
-    {
-        width = x;
-        height = y;
-        currentIndexes = currentIndexes_;
-        currentLevel = level;
-    }
+  
 
     public void SetTotalBombAmount(int totalBombForThisLevel)
     {
@@ -52,23 +44,25 @@ public class GamePlayCanvasController : Singleton<GamePlayCanvasController>
 
     public void LoadLevelEndSprite(bool isItWin,int earnedStars)
     {
-            Debug.Log("aaa");
-            levelEndSprite.gameObject.SetActive(true);
-            levelEndSprite.SetLevelEndSprite(isItWin,earnedStars);
+        StartCoroutine(LoadLevelEndSpriteRoutine(isItWin,earnedStars));
+       
         
     }
-   
+
+    private IEnumerator LoadLevelEndSpriteRoutine(bool isItWin,int earnedStars)
+    {
+        yield return new WaitForSeconds(1f);
+        levelEndSprite.gameObject.SetActive(true);
+        levelEndSprite.SetLevelEndSprite(isItWin, earnedStars);
+    }
 
     public void PlayThisLevelAgain()
     {
         Board.Instance.DeActivateBoard();
-        //Scene scene = SceneManager.GetActiveScene();
-        //SceneManager.LoadScene(scene.name);
-        //Board.Instance.SetCurrentBoardSpecifications(width, height, currentIndexes, currentLevel);
+
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
-        
-        //SceneManager.LoadScene("GamePlay");
+
 
 
     }
@@ -78,14 +72,5 @@ public class GamePlayCanvasController : Singleton<GamePlayCanvasController>
         return totalAmountOfBomb;
     }
 
-    private void OnEnable()
-    {
-        //Board.onNewBombPlaced += DecreaseRemainingBombAmount;
-    }
-    private void OnDisable()
-    {
-        //Board.onNewBombPlaced -= DecreaseRemainingBombAmount;
-
-
-    }
+  
 }

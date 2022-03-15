@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7146774024255345944}
   - component: {fileID: 6050002916102972768}
-  - component: {fileID: 2983910312987665306}
   - component: {fileID: 3572430343457214509}
   m_Layer: 0
   m_Name: TileNormal
@@ -83,18 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2983910312987665306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6256373224269914518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63dc4748955c44ba88834d281dc3ca0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &3572430343457214509
 BoxCollider2D:
   m_ObjectHideFlags: 0

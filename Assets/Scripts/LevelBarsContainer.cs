@@ -31,9 +31,9 @@ public class LevelBarsContainer : Singleton<LevelBarsContainer>
             }
             else if (!lastUnlockedLevelFound && earnedStarCountOfThisLevel == 0)
             {
-                if (i%5==0) //syntax hatası olabilir
+                if (i%5==0) // check specific conditions for 5k levels
                 {
-                    if ((totalEarnedStarCount / (i-1)) >= 2)//syntax hatası olabilir
+                    if ((totalEarnedStarCount / (i-1)) >= 2)
                     {
                         levelCell.SetPlayButtonActive();
 
@@ -55,27 +55,10 @@ public class LevelBarsContainer : Singleton<LevelBarsContainer>
             {
                 levelCell.SetLockedButtonActive();
             }
-            //levelCell.SetLockedButtonActive();
+            
 
         }
-        /*
-        Instantiate(levelBarPrefab, transform);
-        Instantiate(levelBarPrefab, transform);
-        Instantiate(levelBarPrefab, transform);
-        Instantiate(levelBarPrefab, transform);
-        Instantiate(levelBarPrefab, transform);
-        Instantiate(levelBarPrefab, transform);
-        Instantiate(levelBarPrefab, transform);
-        Instantiate(levelBarPrefab, transform);
-        Instantiate(levelBarPrefab, transform);
-        Instantiate(levelBarPrefab, transform);
-        Instantiate(levelBarPrefab, transform);
-        Instantiate(levelBarPrefab, transform);
-        Instantiate(levelBarPrefab, transform);
-        Instantiate(levelBarPrefab, transform);
-        Instantiate(levelBarPrefab, transform);
-        Instantiate(levelBarPrefab, transform);
-        */
+    
         
 
 

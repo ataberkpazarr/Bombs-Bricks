@@ -24,23 +24,16 @@ public static class SaveSystem
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/level" + level.ToString() + ".txt";
-        //FileStream stream = new FileStream(path, FileMode.Append);
-        
-
-
-
-
+      
         LevelData alreadySavedLevelData = LoadLevel(level);
         alreadySavedLevelData.earnedStarCount = earnedStarCount_;
+
         if (File.Exists(path))
         {
             File.Delete(path);
 
         }
         FileStream stream = new FileStream(path, FileMode.Create);
-        //LevelData data = new LevelData(level, earnedStarCount_, indexes); //
-
-
         formatter.Serialize(stream, alreadySavedLevelData);
         stream.Close();
     }
@@ -50,12 +43,12 @@ public static class SaveSystem
     {
         string path = Application.persistentDataPath + "/level" + level.ToString() + ".txt";
 
-        if (File.Exists(path)) // if else yerine yoksa okumayı deneme yapıklabilir
+        if (File.Exists(path)) 
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path,FileMode.Open);
 
-            LevelData leveldata= formatter.Deserialize(stream) as LevelData;  //change back from bianry to old readable format
+            LevelData leveldata= formatter.Deserialize(stream) as LevelData;  //change back from binary to old readable format
             stream.Close();
             return leveldata;
         }

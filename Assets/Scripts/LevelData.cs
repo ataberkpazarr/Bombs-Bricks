@@ -15,6 +15,7 @@ public class LevelData
         level = level_;
         earnedStarCount = earnedStarCount_;
         indexes = indexes_;
+        
     }
-
+    
 }
